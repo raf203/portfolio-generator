@@ -1,6 +1,10 @@
-const profileDataArgs = process.argv.slice(2,process.argv.length);
+const fs = require("fs");
 
-console.log(profileDataArgs);
+const generatePage = require("./src/page-template");
+
+const profileDataArgs = process.argv.slice(2);
+
+// console.log(profileDataArgs);
 
 
 
@@ -19,4 +23,27 @@ console.log(profileDataArgs);
 // printProfileData(profileDataArgs);
 
 
-//9.2.3
+// const generatePage = (userName, githubName) => `Name: ${userName}, Github: ${githubName}`;
+// console.log(generatePage('Rafael', "janehub"));
+
+
+//console.log(generatePage('Rafael', "janehub"));
+
+//const profileDataArgs = process.argv.slice(2, process.argv.length);
+
+// const name = profileDataArgs[0];
+// const github = profileDataArgs[1];
+// console.log(generatePage(name, github));
+
+const [name, github] = profileDataArgs;
+//console.log(name, github);
+//console.log(generatePage(name, github));
+
+
+
+fs.writeFile("index.html", generatePage(name, github), err => {
+   if(err) throw err;
+
+   console.log("Portfolio complete! Checkout index.html to see the output!")
+}
+)
